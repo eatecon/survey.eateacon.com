@@ -19,9 +19,10 @@
       <b-button type="is-primary" @click="computeScore" rounded>คำนวณคะแนน</b-button>
       <b-button type="is-primary" @click="reset" rounded>เริ่มใหม่อีกครั้ง</b-button>
     </b-field>
-    <b-message type="is-primary" v-show="this.showScore" expanded>
-      คะแนนรวมของคุณคือ {{ this.score }}
-    </b-message>
+    <b-message type="is-primary" v-show="this.showScore" expanded>คะแนนรวมของคุณคือ {{ this.score }}</b-message>
+    <b-field class="buttons" position="is-centered" grouped>
+      <b-button size="is-small" icon-left="arrow-expand-up" @click="backToTop">กลับขึ้นด้านบน</b-button>
+    </b-field>
   </div>
 </template>
 <script>
@@ -39,7 +40,7 @@ export default {
     return {
       score: 0,
       showScore: false,
-      questionItems: factfulness.questions,
+      questionItems: factfulness.questions
     };
   },
   methods: {
@@ -47,15 +48,15 @@ export default {
       this.score = this.questionItems.filter(
         item => item.correctedAnswer === item.userAnswer
       ).length;
-      
-      this.questionItems.forEach(item => item.showAnswer = true);
+
+      this.questionItems.forEach(item => (item.showAnswer = true));
       this.showScore = true;
 
       this.$buefy.dialog.alert({
         type: "is-success",
-        title: 'คะแนนรวม',
-        message: '<b>คะแนนรวมของคุณคือ ' + this.score + '</b>',
-        confirmText: 'ปิดหน้าต่างนี้!'
+        title: "คะแนนรวม",
+        message: "<b>คะแนนรวมของคุณคือ " + this.score + "</b>",
+        confirmText: "ปิดหน้าต่างนี้!"
       });
     },
     reset() {
@@ -65,7 +66,13 @@ export default {
       });
 
       this.showScore = false;
+    },
+    backToTop() {
+      window.scroll({
+        top: 0,
+        behavior: "smooth"
+      });
     }
-  },
+  }
 };
 </script>
