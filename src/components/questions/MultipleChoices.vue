@@ -1,43 +1,37 @@
 <template>
   <div class="card-content">
     <b-field v-bind:label="questionLabel"></b-field>
-    <b-field grouped>
+    <b-field grouped group-multiline>
       <b-field v-for="choice in questionObject.choices" v-bind:key="choice.choiceId">
         <b-radio-button
-          @click.native="revealAnswer"
-          v-model="radio"
-          v-bind:native-value="choice.choiceId"
+          v-model="questionObject.userAnswer"
+          @click="fireChanges"
+          :native-value="choice.choiceId"
         >{{ choice.choiceId + ". " + choice.text }}</b-radio-button>
       </b-field>
     </b-field>
-    <b-field 
-      custom-class="has-text-danger"
-      v-show="showAnswer" 
-      v-bind:label="'คำตอบที่ถูกคือ ' + questionObject.correctedAnswer" 
-    ></b-field>
+    <b-message type="is-danger" v-show="questionObject.showAnswer">
+      คำตอบที่ถูกคือ  {{ questionObject.correctedAnswer }}
+    </b-message>
   </div>
 </template>
 <script>
 export default {
-  props: {
-    questionId: Number,
-    questionObject: Object
-  },
+  props: ["value"],
   data: function() {
     return {
-      radio: 0,
-      showAnswer: false,
+      questionObject: this.value,
     };
   },
   methods: {
-    revealAnswer() {
-      this.showAnswer = true;
-    }
+    fireChanges() {
+      this.$emit("input", this.questionObject);
+    },
   },
   computed: {
     questionLabel() {
       return this.questionObject.questionId + '. ' + this.questionObject.questionText;
-    }
-  }
+    },
+  },
 };
 </script>
