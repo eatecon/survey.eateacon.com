@@ -1,14 +1,12 @@
 <template>
   <div class="card-content">
     <b-field v-bind:label="questionLabel"></b-field>
-    <b-field grouped group-multiline>
-      <b-field v-for="choice in questionObject.choices" v-bind:key="choice.choiceId">
-        <b-radio-button
-          v-model="questionObject.userAnswer"
-          @click="fireChanges"
-          :native-value="choice.choiceId"
-        >{{ choice.choiceId + ". " + choice.text }}</b-radio-button>
-      </b-field>
+    <b-field class="buttons" v-for="choice in questionObject.choices" v-bind:key="choice.choiceId">
+      <b-radio-button
+        v-model="questionObject.userAnswer"
+        @click="fireChanges"
+        :native-value="choice.choiceId"
+      >{{ choice.choiceId + ". " + choice.text }}</b-radio-button>
     </b-field>
     <b-message type="is-danger" v-show="questionObject.showAnswer">
       คำตอบที่ถูกคือ  {{ questionObject.correctedAnswer }}

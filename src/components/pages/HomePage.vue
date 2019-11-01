@@ -9,16 +9,18 @@
         </div>
       </div>
     </section>
-    <p class="content is-large"></p>
-    <b-field class="buttons is-10 is-offset-1">
+    <div class="level">
+      <p class="level-item has-text-centered">
+        กรุณาเลือกแบบทดสอบที่คุณสนใจ
+      </p>
+    </div>
+    <b-field class="buttons are-large">
       <b-button
         type="is-primary"
         tag="router-link"
         :to="{ path: '/factfulness' }"
         expanded
       >Factfulness Survey</b-button>
-    </b-field>
-    <b-field class="buttons">
       <b-button type="is-primary" expanded>MBTI (Coming Soon)</b-button>
     </b-field>
   </div>

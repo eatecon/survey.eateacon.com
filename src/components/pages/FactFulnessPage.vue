@@ -1,7 +1,9 @@
 <template>
   <div>
     <section class="hero is-primary">
-      <nav-bar></nav-bar>
+      <div class="hero-head">
+        <nav-bar></nav-bar>
+      </div>
       <div class="hero-body">
         <div class="container">
           <h1 class="title">แบบทดสอบทางความคิด และพฤติกรรมการกิน</h1>
@@ -9,7 +11,6 @@
         </div>
       </div>
     </section>
-    <div></div>
     <mulitple-choices
       v-for="question in questionItems"
       :key="question.questionId"
@@ -56,7 +57,8 @@ export default {
         type: "is-success",
         title: "คะแนนรวม",
         message: "<b>คะแนนรวมของคุณคือ " + this.score + "</b>",
-        confirmText: "ปิดหน้าต่างนี้!"
+        confirmText: "ปิดหน้าต่างนี้!",
+        onConfirm: this.goToBottom,
       });
     },
     reset() {
@@ -72,6 +74,12 @@ export default {
         top: 0,
         behavior: "smooth"
       });
+    },
+    goToBottom() {
+      window.scrollTo(
+        0, 
+        document.body.scrollHeight || document.documentElement.scrollHeight
+      );
     }
   }
 };
