@@ -20,6 +20,10 @@ const routeList = [
     path: "/mbti",
     component: MBTIPage,
   },
+  {
+    path: "*",
+    component: HomePage,
+  }
 ];
 
 export const router = new VueRouter({
