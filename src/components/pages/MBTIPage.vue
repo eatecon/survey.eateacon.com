@@ -27,7 +27,7 @@
       </b-field>
     </div>
     <div class="column">
-      <b-message type="is-primary" v-show="this.showScore" expanded>คะแนนรวมของคุณคือ {{ this.score }}</b-message>
+      <b-message type="is-primary" v-show="this.showScore" expanded>คะแนนรวมของคุณคือ {{ fourLetterScore }}</b-message>
       <b-field class="buttons" position="is-centered" grouped>
         <b-button size="is-small is-tall-container" icon-left="arrow-expand-up" @click="backToTop">กลับขึ้นด้านบน</b-button>
       </b-field>
@@ -47,42 +47,57 @@ export default {
   },
   data: function() {
     return {
-      score: {
-        firstA: 0,
-        firstB: 0,
-        secondA: 0,
-        secondB: 0,
-        thirdA: 0,
-        thirdB: 0,
-        fourthA: 0,
-        fourthB: 0,
-      },
-      showScore: true,
+      score: [
+        { start: 0, stop: 10, letterA: "E", letterB: "I", priorityLetter: "I", sumA: 0, sumB: 0, result: "" },
+        { start: 10, stop: 20, letterA: "S", letterB: "N", priorityLetter: "N", sumA: 0, sumB: 0, result: "" },
+        { start: 20, stop: 30, letterA: "T", letterB: "F", priorityLetter: "F", sumA: 0, sumB: 0, result: "" },
+        { start: 30, stop: 40, letterA: "J", letterB: "P", priorityLetter: "P", sumA: 0, sumB: 0, result: "" },
+      ],
+      fourLetterScore: "XXXX",
+      showScore: false,
       questionItems: mbti.questions,
-
     };
   },
   methods: {
     computeScore() {
-      this.questionItems.slice(0,10).forEach(item => {
-        if (item.userAnswer === "A") {
-          this.fourthA++;
+      this.score.forEach(letter => {
+        this.questionItems.slice(letter.start, letter.stop)
+          .forEach(item => {
+            if (item.userAnswer === "A") {
+              letter.sumA++;
+            }
+
+            if (item.userAnswer === "B") {
+              letter.sumB++;
+            }
+          });
+        
+        letter.result = "X";
+
+        if (letter.sumA > letter.sumB) {
+          letter.result = letter.letterA;
         }
 
-        if (item.userAnswer === "B") {
-          this.fourthB++;
+        if (letter.sumB > letter.sumA) {
+          letter.result = letter.letterB;
+        }
+
+        if (letter.sumA === letter.sumB && letter.sumA != 0 && letter.sumB != 0) {
+          letter.result = letter.priorityLetter;
         }
       });
+
+      this.fourLetterScore = "";
+      this.score.forEach(item => this.fourLetterScore = this.fourLetterScore + item.result);
+      this.showScore = true;
 
       this.$buefy.dialog.alert({
         type: "is-primary",
-        title: "คะแนนรวม",
-        message: "<b>คะแนนรวมของคุณคือ " + this.score + "</b>",
+        title: "ผลการประเมิน MBTI",
+        message: "<b>Type Indicator ของคุณคือ " + this.fourLetterScore + "</b>",
         confirmText: "ตกลง!",
         onConfirm: this.goToBottom,
       });
-
-      this.showScore = true;
     },
     reset() {
       this.questionItems.forEach(item => {
@@ -90,7 +105,8 @@ export default {
         item.showAnswer = false;
       });
 
-      this.showScore = true;
+      this.fourLetterScore = "";
+      this.showScore = false;
     },
     backToTop() {
       window.scroll({
