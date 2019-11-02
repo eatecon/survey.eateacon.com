@@ -1,28 +1,35 @@
 <template>
-  <div>
-    <section class="hero is-primary">
-      <nav-bar></nav-bar>
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">แบบทดสอบทางความคิด และพฤติกรรมการกิน</h1>
-          <h2 class="subtitle">ยินดีต้อนรับเข้าสู่ EatEcon Survey</h2>
+  <div class="columns is-multiline is-desktop">
+    <div class="column is-full">
+      <section class="hero is-primary is-small">
+        <nav-bar></nav-bar>
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">แบบทดสอบทางความคิด และพฤติกรรมการกิน</h1>
+            <h2 class="subtitle">ยินดีต้อนรับเข้าสู่ EatEcon Survey</h2>
+          </div>
         </div>
-      </div>
-    </section>
-    <div class="level">
-      <p class="level-item has-text-centered">
-        กรุณาเลือกแบบทดสอบที่คุณสนใจ
-      </p>
+      </section>
     </div>
-    <b-field class="buttons are-large">
+    <div class="column is-full">
+      <p class="content has-text-centered">กรุณาเลือกแบบทดสอบที่คุณสนใจ</p>
+    </div>
+    <div class="column">
+      <b-button 
+        type="is-danger is-large" 
+        tag="router-link" 
+        :to="{ path: '/mbti' }" 
+        expanded
+      >MBTI</b-button>
+    </div>
+    <div class="column">
       <b-button
-        type="is-primary"
+        type="is-primary is-large"
         tag="router-link"
         :to="{ path: '/factfulness' }"
         expanded
       >Factfulness Survey</b-button>
-      <b-button type="is-primary" expanded>MBTI (Coming Soon)</b-button>
-    </b-field>
+    </div>
   </div>
 </template>
 <script>

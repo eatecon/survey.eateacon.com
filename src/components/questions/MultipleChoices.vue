@@ -1,5 +1,5 @@
 <template>
-  <div class="card-content">
+  <div class="box">
     <b-field v-bind:label="questionLabel"></b-field>
     <b-field class="buttons" v-for="choice in questionObject.choices" v-bind:key="choice.choiceId">
       <b-radio-button

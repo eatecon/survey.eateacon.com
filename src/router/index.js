@@ -2,8 +2,8 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import HomePage from "../components/pages/HomePage.vue";
-import ProfilePage from "../components/pages/ProfilePage.vue";
 import FactFulnessPage from "../components/pages/FactFulnessPage.vue";
+import MBTIPage from "../components/pages/MBTIPage.vue";
 
 Vue.use(VueRouter);
 
@@ -17,8 +17,8 @@ const routeList = [
     component: FactFulnessPage,
   },
   {
-    path: "/profile",
-    component: ProfilePage,
+    path: "/mbti",
+    component: MBTIPage,
   },
 ];
 

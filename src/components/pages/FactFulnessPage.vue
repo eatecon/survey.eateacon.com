@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <section class="hero is-primary">
-      <div class="hero-head">
+  <div class="columns is-multiline is-desktop">
+    <div class="column is-full">
+      <section class="hero is-primary is-small">
         <nav-bar></nav-bar>
-      </div>
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">แบบทดสอบทางความคิด และพฤติกรรมการกิน</h1>
-          <h2 class="subtitle">จริงๆ แล้วโลกดีขึ้นทุกวัน คุณเชื่อหรือไม่?</h2>
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">แบบทดสอบทางความคิด และพฤติกรรมการกิน</h1>
+            <h2 class="subtitle">จริงๆ แล้วโลกดีขึ้นทุกวัน คุณเชื่อหรือไม่?</h2>
+          </div>
         </div>
-      </div>
-    </section>
-    <mulitple-choices
-      v-for="question in questionItems"
-      :key="question.questionId"
-      v-model="questionItems[question.questionId-1]"
-    ></mulitple-choices>
+      </section>
+    </div>
+    <div class="column">
+      <mulitple-choices
+        v-for="question in questionItems"
+        :key="question.questionId"
+        v-model="questionItems[question.questionId-1]"
+      ></mulitple-choices>
+    </div>
     <b-field class="buttons" position="is-centered" grouped>
       <b-button type="is-primary" @click="computeScore" rounded>คำนวณคะแนน</b-button>
       <b-button type="is-primary" @click="reset" rounded>เริ่มใหม่อีกครั้ง</b-button>
@@ -30,7 +32,7 @@
 import NavBar from "../layouts/NavBar.vue";
 import MulitpleChoices from "../questions/MultipleChoices.vue";
 
-import factfulness from "../../store/modules/surveys/factfulness";
+import factfulness from "../../store/modules/surveys/data-factfulness";
 
 export default {
   components: {
@@ -54,7 +56,7 @@ export default {
       this.showScore = true;
 
       this.$buefy.dialog.alert({
-        type: "is-success",
+        type: "is-primary",
         title: "คะแนนรวม",
         message: "<b>คะแนนรวมของคุณคือ " + this.score + "</b>",
         confirmText: "ปิดหน้าต่างนี้!",
