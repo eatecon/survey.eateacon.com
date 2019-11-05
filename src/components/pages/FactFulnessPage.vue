@@ -11,21 +11,23 @@
         </div>
       </section>
     </div>
-    <div class="column">
+    <div class="column is-full">
       <mulitple-choices
         v-for="question in questionItems"
         :key="question.questionId"
         v-model="questionItems[question.questionId-1]"
       ></mulitple-choices>
     </div>
-    <b-field class="buttons" position="is-centered" grouped>
-      <b-button type="is-primary" @click="computeScore" rounded>คำนวณคะแนน</b-button>
-      <b-button type="is-primary" @click="reset" rounded>เริ่มใหม่อีกครั้ง</b-button>
-    </b-field>
-    <b-message type="is-primary" v-show="this.showScore" expanded>คะแนนรวมของคุณคือ {{ this.score }}</b-message>
-    <b-field class="buttons" position="is-centered" grouped>
-      <b-button size="is-small" icon-left="arrow-expand-up" @click="backToTop">กลับขึ้นด้านบน</b-button>
-    </b-field>
+    <div class="column is-full">
+      <b-field class="buttons" position="is-centered" grouped>
+        <b-button type="is-primary" @click="computeScore" rounded>คำนวณคะแนน</b-button>
+        <b-button type="is-primary" @click="reset" rounded>เริ่มใหม่อีกครั้ง</b-button>
+      </b-field>
+      <b-message type="is-primary" v-show="this.showScore" expanded>คะแนนรวมของคุณคือ {{ this.score }}</b-message>
+      <b-field class="buttons" position="is-centered" grouped>
+        <b-button size="is-small" icon-left="arrow-expand-up" @click="backToTop">กลับขึ้นด้านบน</b-button>
+      </b-field>
+    </div>
   </div>
 </template>
 <script>

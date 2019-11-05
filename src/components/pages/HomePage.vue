@@ -23,6 +23,14 @@
       >MBTI</b-button>
     </div>
     <div class="column">
+      <b-button 
+        type="is-info is-large" 
+        tag="router-link" 
+        :to="{ path: '/mindset' }" 
+        expanded
+      >Mindset</b-button>
+    </div>
+    <div class="column">
       <b-button
         type="is-primary is-large"
         tag="router-link"

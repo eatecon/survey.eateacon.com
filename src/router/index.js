@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import HomePage from "../components/pages/HomePage.vue";
 import FactFulnessPage from "../components/pages/FactFulnessPage.vue";
 import MBTIPage from "../components/pages/MBTIPage.vue";
+import MindSetPage from "../components/pages/MindSetPage.vue";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,10 @@ const routeList = [
   {
     path: "/mbti",
     component: MBTIPage,
+  },
+  {
+    path: "/mindset",
+    component: MindSetPage,
   },
   {
     path: "*",
